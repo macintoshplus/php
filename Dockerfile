@@ -18,8 +18,8 @@ RUN 		export LANGUAGE=en_US.UTF-8 && \
         locale-gen en_US.UTF-8 && \
         DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
-# Apache
-RUN		apt-get -y install pdftk mysql-client xfonts-75dpi
+# Apache 
+RUN		apt-get -y install pdftk mysql-client xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig
 
 COPY		bin/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb /root/
 RUN		dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
