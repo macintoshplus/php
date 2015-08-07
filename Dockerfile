@@ -9,7 +9,7 @@ ENV 		DEBIAN_FRONTEND noninteractive
 RUN		apt-get update && apt-get -y upgrade
 
 # Common packages
-RUN 		apt-get -y install curl wget locales nano git subversion
+RUN 		apt-get -y install curl wget locales nano git subversion sudo
 
 RUN 		echo "Europe/Paris" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 RUN 		export LANGUAGE=en_US.UTF-8 && \
