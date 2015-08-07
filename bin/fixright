@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -d "/src" ]
+then
+
+USERID=$(stat -c "%u" /src)
+GROUPID=$(stat -c "%g" /src)
+
+groupmod -g $GROUPID phpuser
+usermod -u $USERID -g $GROUPID phpuser
+
+fi
