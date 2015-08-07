@@ -38,7 +38,7 @@ RUN     pear channel-discover pear.phpmd.org && pear channel-discover pear.pdepe
 RUN     pear install PHP_CodeSniffer && pear install --alldeps phpmd/PHP_PMD
 RUN     git clone https://github.com/lapistano/Symfony2-coding-standard.git /usr/share/php/PHP/CodeSniffer/Standards/Symfony2
 
-RUN             useradd -s /bin/bash -b /src -M phpuser
+RUN             useradd -s /bin/bash --home /src --no-create-home phpuser
 COPY            bin/fixright /
 RUN             chmod +x /fixright
 
