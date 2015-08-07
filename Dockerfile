@@ -38,6 +38,7 @@ RUN		pear channel-discover pear.phpmd.org && pear channel-discover pear.pdepend.
 RUN		pear install PHP_CodeSniffer && pear install --alldeps phpmd/PHP_PMD
 RUN		git clone https://github.com/lapistano/Symfony2-coding-standard.git /usr/share/php/PHP/CodeSniffer/Standards/Symfony2
 
+RUN             useradd -s /bin/bash -b /src -M phpuser
 
 VOLUME 		/src
 
