@@ -34,6 +34,9 @@ RUN             sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_wa
 
 #PEAR
 RUN     pear install pecl/amqp
+RUN     echo "extension=amqp.so" > /etc/php5/mods-available/amqp.ini
+RUN     cd /etc/php5/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
+RUN     cd /etc/php5/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     pear channel-discover pear.phpmd.org && pear channel-discover pear.pdepend.org && pear channel-discover pear.phpdoc.org && pear channel-discover components.ez.no
 RUN     pear install PHP_CodeSniffer && pear install --alldeps phpmd/PHP_PMD
 RUN     git clone https://github.com/lapistano/Symfony2-coding-standard.git /usr/share/php/PHP/CodeSniffer/Standards/Symfony2
