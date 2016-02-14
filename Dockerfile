@@ -15,7 +15,7 @@ RUN     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.lis
 RUN     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list
 RUN     wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 
-RUN     apt-get -y php7-dev
+RUN     apt-get update && apt-get -y upgrade && apt-get -y php7-dev
 
 RUN         echo "Europe/Paris" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 RUN         export LANGUAGE=en_US.UTF-8 && \
