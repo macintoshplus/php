@@ -33,7 +33,7 @@ RUN             sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_wa
 
 
 #PEAR
-RUN     pear install pecl/amqp
+RUN     pear install pecl/amqp-1.7.0alpha2
 RUN     echo "extension=amqp.so" > /etc/php5/mods-available/amqp.ini
 #RUN     cd /etc/php5/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     cd /etc/php5/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
