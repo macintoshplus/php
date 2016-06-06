@@ -32,9 +32,11 @@ RUN         sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php5/
 RUN             sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/\;disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/g' /etc/php5/cli/php.ini
 #RUN        sed -i 's/;include_path = ".:\/usr\/share\/php"/include_path = ".:\/var\/www\/library"/g' /etc/php5/cli/php.ini
 
+RUN     wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.4.0/pickle.phar
+RUN     php pickle.phar install xdebug
 
 #PEAR
-RUN     pear install pecl/amqp-1.7.0alpha2
+RUN     pear upgrade && pear install pecl/amqp-1.7.0
 RUN     echo "extension=amqp.so" > /etc/php5/mods-available/amqp.ini
 #RUN     cd /etc/php5/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     cd /etc/php5/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
