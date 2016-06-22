@@ -36,7 +36,7 @@ RUN     wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.4.0/pic
 RUN     php pickle.phar install xdebug
 
 #PEAR
-RUN     pear upgrade && pear install pecl/amqp-1.7.0
+RUN     pear upgrade && pear install pecl/amqp-1.7.0 && pear install xdebug
 RUN     echo "extension=amqp.so" > /etc/php5/mods-available/amqp.ini
 #RUN     cd /etc/php5/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     cd /etc/php5/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
