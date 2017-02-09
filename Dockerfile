@@ -6,17 +6,16 @@ FROM            debian:jessie
 MAINTAINER  Jean-Baptiste Nahan <jean-baptiste@nahan.fr>
 
 ENV         DEBIAN_FRONTEND noninteractive
-RUN     apt-get update && apt-get -y upgrade
 
 # Common packages
-RUN     apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk mysql-client xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig
+RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk mysql-client xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig
 
 RUN     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 RUN     wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 
 ENV 	JAVA_VERSION 8u121
 ENV 	JAVA_DEBIAN_VERSION 8u121-b13-1~bpo8+1
-ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107
+ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107~bpo8+1
 RUN     apt-get update && apt-get -y upgrade && apt-get install -y php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
 
 RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure && ln -s /usr/bin/java /bin/java
