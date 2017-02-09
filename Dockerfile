@@ -9,13 +9,17 @@ ENV         DEBIAN_FRONTEND noninteractive
 RUN     apt-get update && apt-get -y upgrade
 
 # Common packages
-RUN         apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev
+RUN     apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk mysql-client xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig
 
-RUN     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list
-RUN     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list
+RUN     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 RUN     wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 
-RUN     apt-get update && apt-get -y upgrade && apt-get install -y php7.0-dev
+ENV 	JAVA_VERSION 8u121
+ENV 	JAVA_DEBIAN_VERSION 8u121-b13-1~bpo8+1
+ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107
+RUN     apt-get update && apt-get -y upgrade && apt-get install -y php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
+
+RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure && ln -s /usr/bin/java /bin/java
 
 RUN         echo "Europe/Paris" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 RUN         export LANGUAGE=en_US.UTF-8 && \
@@ -23,9 +27,6 @@ RUN         export LANGUAGE=en_US.UTF-8 && \
         export LC_ALL=en_US.UTF-8 && \
         locale-gen en_US.UTF-8 && \
         DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
-
-# Apache 
-RUN     apt-get -y install pdftk mysql-client xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig
 
 COPY        bin/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb /root/
 RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
@@ -35,7 +36,7 @@ RUN     apt-get -y install php7.0-cli php7.0-curl php-pear php7.0-imagick php7.0
 #RUN         cp /usr/share/php7/php.ini-development /etc/php7/cli/php.ini
 RUN         sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.0/cli/php.ini
 RUN         sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php/7.0/cli/php.ini
-RUN             sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/\;disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/g' /etc/php/7.0/cli/php.ini
+RUN         sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/\;disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/g' /etc/php/7.0/cli/php.ini
 #RUN        sed -i 's/;include_path = ".:\/usr\/share\/php"/include_path = ".:\/var\/www\/library"/g' /etc/php/7.0/cli/php.ini
 
 
