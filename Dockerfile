@@ -2,7 +2,7 @@
 # Jb Nahan PHP 5.6 container
 ##
 
-FROM            debian:jessie
+FROM            debian:testing
 MAINTAINER  Jean-Baptiste Nahan <jean-baptiste@nahan.fr>
 
 ENV         DEBIAN_FRONTEND noninteractive
