@@ -21,10 +21,11 @@ RUN     wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add mi
 ENV 	JAVA_VERSION 8u121
 ENV 	JAVA_DEBIAN_VERSION 8u121-b13-1~bpo8+1
 ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107~bpo8+1
-ENV     ACCEPT_EULA=Y
+ENV     ACCEPT_EULA Y
 RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
 
-RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && source /root/.bashrc
+RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc && ./root/.bashrc
+ENV     PATH "$PATH:/opt/mssql-tools/bin"
 
 RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure && ln -s /usr/bin/java /bin/java
 
