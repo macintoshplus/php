@@ -22,7 +22,7 @@ ENV 	JAVA_VERSION 8u121
 ENV 	JAVA_DEBIAN_VERSION 8u121-b13-1~bpo8+1
 ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107~bpo8+1
 ENV     ACCEPT_EULA Y
-RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
+RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
 
 RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc && ./root/.bashrc
 ENV     PATH "$PATH:/opt/mssql-tools/bin"
@@ -36,8 +36,8 @@ RUN         export LANGUAGE=en_US.UTF-8 && \
         locale-gen en_US.UTF-8 && \
         DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
-COPY        bin/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb /root/
-RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
+#COPY        bin/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb /root/
+#RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 # PHP
 RUN     apt-get -y install php7.0-cli php7.0-curl php-pear php7.0-imagick php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-mysql php7.0-sqlite3 php7.0-xmlrpc php7.0-xsl php7.0-xdebug php7.0-apcu php7.0-ldap php7.0-gmp php7.0-intl php7.0-redis php7.0-zip php7.0-soap
