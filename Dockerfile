@@ -27,7 +27,7 @@ RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client 
 RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc && ./root/.bashrc
 ENV     PATH "$PATH:/opt/mssql-tools/bin"
 
-RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure && ln -s /usr/bin/java /bin/java
+RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 RUN         echo "Europe/Paris" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 RUN         export LANGUAGE=en_US.UTF-8 && \
