@@ -1,5 +1,5 @@
 ##
-# Jb Nahan PHP 5.6 container
+# Jb Nahan PHP 7.0 container
 ##
 
 FROM            debian:testing
@@ -62,11 +62,11 @@ RUN     pear channel-discover pear.phpmd.org && pear channel-discover pear.pdepe
 RUN     pear install PHP_CodeSniffer && pear install --alldeps phpmd/PHP_PMD
 RUN     git clone https://github.com/lapistano/Symfony2-coding-standard.git /usr/share/php/PHP/CodeSniffer/Standards/Symfony2
 
-RUN             useradd -s /bin/bash --home /src --no-create-home phpuser
+RUN             useradd -s /bin/bash --home /sources --no-create-home phpuser
 COPY            bin/fixright /
 RUN             chmod +x /fixright
 
-VOLUME      /src
+VOLUME      /sources
 
-WORKDIR     /src
+WORKDIR     /sources
 
