@@ -20,7 +20,7 @@ RUN     echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7"  >> /etc/a
 RUN     wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add microsoft.asc
 
 ENV 	JAVA_VERSION 8u121
-ENV 	JAVA_DEBIAN_VERSION 8u121-b13-3
+ENV 	JAVA_DEBIAN_VERSION 8u121-b13-4
 ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107
 ENV     ACCEPT_EULA Y
 RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
