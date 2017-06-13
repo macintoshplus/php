@@ -1,5 +1,5 @@
 ##
-# Jb Nahan PHP 7.0 container
+# Jb Nahan PHP 7.1 container
 ##
 
 FROM            debian:testing
@@ -12,15 +12,15 @@ RUN     echo "deb http://httpredir.debian.org/debian jessie-backports main contr
 RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.0
 
 RUN     curl https://packages.microsoft.com/config/ubuntu/15.10/prod.list > /etc/apt/sources.list.d/mssql-release.list
-#RUN     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
-#RUN     wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
+RUN     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list
+RUN     wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 COPY    mysql_key.pub /root/
 RUN     apt-key add /root/mysql_key.pub
 RUN     echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
 RUN     wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add microsoft.asc
 
-ENV 	JAVA_VERSION 8u121
-ENV 	JAVA_DEBIAN_VERSION 8u121-b13-4
+ENV 	JAVA_VERSION 8u131
+ENV 	JAVA_DEBIAN_VERSION 8u131-b11-1~bpo8+1
 ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107
 ENV     ACCEPT_EULA Y
 RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
@@ -41,23 +41,23 @@ RUN         export LANGUAGE=en_US.UTF-8 && \
 #RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 # PHP
-RUN     apt-get -y install php7.0-cli php7.0-curl php-pear php7.0-imagick php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-mysql php7.0-sqlite3 php7.0-xmlrpc php7.0-xsl php7.0-xdebug php7.0-apcu php7.0-ldap php7.0-gmp php7.0-intl php7.0-redis php7.0-zip php7.0-soap
-RUN     sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.0/cli/php.ini
-RUN     sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php/7.0/cli/php.ini
+RUN     apt-get -y install php7.1-cli php7.1-curl php-pear php7.1-imagick php7.1-gd php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-sqlite3 php7.1-xmlrpc php7.1-xsl php7.1-xdebug php7.1-apcu php7.1-ldap php7.1-gmp php7.1-intl php7.1-redis php7.1-zip php7.1-soap
+RUN     sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.1/cli/php.ini
+RUN     sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php/7.1/cli/php.ini
 RUN     sed -i 's/\display_errors\ \=\ Off/display_errors\ \=\ On/g' /etc/php/7.0/cli/php.ini
 RUN     sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/\;disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/g' /etc/php/7.0/cli/php.ini
 
 RUN     pecl install sqlsrv && pecl install pdo_sqlsrv
-RUN     echo "extension=sqlsrv.so" > /etc/php/7.0/mods-available/sqlsrv.ini
-RUN     echo "extension=pdo_sqlsrv.so" > /etc/php/7.0/mods-available/pdo_sqlsrv.ini
-RUN     cd /etc/php/7.0/cli/conf.d && ln -s ../../mods-available/sqlsrv.ini 20-sqlsrv.ini
-RUN     cd /etc/php/7.0/cli/conf.d && ln -s ../../mods-available/pdo_sqlsrv.ini 20-pdo_sqlsrv.ini
+RUN     echo "extension=sqlsrv.so" > /etc/php/7.1/mods-available/sqlsrv.ini
+RUN     echo "extension=pdo_sqlsrv.so" > /etc/php/7.1/mods-available/pdo_sqlsrv.ini
+RUN     cd /etc/php/7.1/cli/conf.d && ln -s ../../mods-available/sqlsrv.ini 20-sqlsrv.ini
+RUN     cd /etc/php/7.1/cli/conf.d && ln -s ../../mods-available/pdo_sqlsrv.ini 20-pdo_sqlsrv.ini
 
 #PEAR
 RUN     pear upgrade && pear install pecl/amqp-1.7.1
-RUN     echo "extension=amqp.so" > /etc/php/7.0/mods-available/amqp.ini
-#RUN     cd /etc/php/7.0/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
-RUN     cd /etc/php/7.0/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
+RUN     echo "extension=amqp.so" > /etc/php/7.1/mods-available/amqp.ini
+#RUN     cd /etc/php/7.1/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
+RUN     cd /etc/php/7.1/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     pear channel-discover pear.phpmd.org && pear channel-discover pear.pdepend.org && pear channel-discover pear.phpdoc.org && pear channel-discover components.ez.no
 RUN     pear install PHP_CodeSniffer && pear install --alldeps phpmd/PHP_PMD
 RUN     git clone https://github.com/lapistano/Symfony2-coding-standard.git /usr/share/php/PHP/CodeSniffer/Standards/Symfony2
