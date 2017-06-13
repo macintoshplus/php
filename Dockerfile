@@ -43,7 +43,7 @@ RUN         export LANGUAGE=en_US.UTF-8 && \
 #RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 # PHP
-RUN     apt-get -y install php7.1-cli php7.1-curl php-pear php7.1-imagick php7.1-gd php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-sqlite3 php7.1-xmlrpc php7.1-xsl php7.1-xdebug php7.1-apcu php7.1-ldap php7.1-gmp php7.1-intl php7.1-redis php7.1-zip php7.1-soap
+RUN     apt-get -y install php7.1-cli php7.1-curl php-pear php7.1-imagick php7.1-gd php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-sqlite3 php7.1-xmlrpc php7.1-xsl php7.1-xdebug php7.1-apcu php7.1-ldap php7.1-gmp php7.1-intl php-redis php7.1-zip php7.1-soap
 RUN     sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.1/cli/php.ini
 RUN     sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php/7.1/cli/php.ini
 RUN     sed -i 's/\display_errors\ \=\ Off/display_errors\ \=\ On/g' /etc/php/7.0/cli/php.ini
@@ -56,7 +56,7 @@ RUN     cd /etc/php/7.1/cli/conf.d && ln -s ../../mods-available/sqlsrv.ini 20-s
 RUN     cd /etc/php/7.1/cli/conf.d && ln -s ../../mods-available/pdo_sqlsrv.ini 20-pdo_sqlsrv.ini
 
 #PEAR
-RUN     pear upgrade && pear install pecl/amqp-1.7.1
+RUN     pear upgrade && pear install pecl/amqp-1.9.1
 RUN     echo "extension=amqp.so" > /etc/php/7.1/mods-available/amqp.ini
 #RUN     cd /etc/php/7.1/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     cd /etc/php/7.1/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
