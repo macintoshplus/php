@@ -9,7 +9,7 @@ ENV         DEBIAN_FRONTEND noninteractive
 
 # Common packages
 RUN     echo "deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" > /etc/apt/sources.list.d/jessie-backport.list
-RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.0 lsb-release ca-certificates
+RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.0 lsb-release ca-certificates pkg-config
 RUN wget -O /root/php.gpg https://packages.sury.org/php/apt.gpg && apt-key add /root/php.gpg
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 
@@ -61,7 +61,7 @@ RUN     echo "extension=amqp.so" > /etc/php/7.1/mods-available/amqp.ini
 #RUN     cd /etc/php/7.1/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     cd /etc/php/7.1/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     pear channel-discover pear.phpmd.org && pear channel-discover pear.pdepend.org && pear channel-discover pear.phpdoc.org && pear channel-discover components.ez.no
-#RUN     pear install PHP_CodeSniffer && pear install --alldeps phpmd/PHP_PMD
+RUN     pear install PHP_CodeSniffer && pear install --alldeps phpmd/PHP_PMD
 
 
 RUN             useradd -s /bin/bash --home /sources --no-create-home phpuser
