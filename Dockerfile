@@ -54,7 +54,7 @@ RUN     cd /etc/php/7.0/cli/conf.d && ln -s ../../mods-available/sqlsrv.ini 20-s
 RUN     cd /etc/php/7.0/cli/conf.d && ln -s ../../mods-available/pdo_sqlsrv.ini 20-pdo_sqlsrv.ini
 
 #PEAR
-RUN     pear upgrade && pear install pecl/amqp-1.7.1
+RUN     pear upgrade && pear install pecl/amqp-1.9.1
 RUN     echo "extension=amqp.so" > /etc/php/7.0/mods-available/amqp.ini
 #RUN     cd /etc/php/7.0/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     cd /etc/php/7.0/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
