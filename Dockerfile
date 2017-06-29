@@ -8,26 +8,25 @@ MAINTAINER  Jean-Baptiste Nahan <jean-baptiste@nahan.fr>
 ENV         DEBIAN_FRONTEND noninteractive
 
 # Common packages
-#RUN     echo "deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" > /etc/apt/sources.list.d/jessie-backport.list
-RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.0 pkg-config libmagickwand-dev
+#RUN     echo "deb http://httpredir.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/stretch-backport.list
+RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.2 pkg-config libmagickwand-dev
 RUN     wget -O /root/php.gpg https://packages.sury.org/php/apt.gpg && apt-key add /root/php.gpg
-RUN     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+RUN     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
 
 RUN     curl https://packages.microsoft.com/config/ubuntu/15.10/prod.list > /etc/apt/sources.list.d/mssql-release.list
-#RUN     echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
-#RUN     wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 COPY    mysql_key.pub /root/
 RUN     apt-key add /root/mysql_key.pub
 RUN     echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
 RUN     wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add microsoft.asc
 
 ENV 	JAVA_VERSION 8u131
-ENV 	JAVA_DEBIAN_VERSION 8u131-b11-1~bpo8+1
-ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107~bpo8+1
+ENV 	JAVA_DEBIAN_VERSION 8u131-b11-2
+ENV 	CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
 ENV     ACCEPT_EULA Y
 RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf php7.0-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
 
-RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc && ./root/.bashrc
+RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc
+RUN     /root/.bashrc
 ENV     PATH "$PATH:/opt/mssql-tools/bin"
 
 RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure
@@ -43,7 +42,7 @@ RUN         export LANGUAGE=en_US.UTF-8 && \
 #RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 # PHP
-RUN     apt-get -y install php7.0-cli php7.0-curl php-pear php7.0-imagick php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-mysql php7.0-sqlite3 php7.0-xmlrpc php7.0-xsl php7.0-xdebug php7.0-apcu php7.0-ldap php7.0-gmp php7.0-intl php7.0-redis php7.0-zip php7.0-soap
+RUN     apt-get -y install php7.0-cli php7.0-curl php-pear php7.0-imagick php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-mysql php7.0-sqlite3 php7.0-xmlrpc php7.0-xsl php7.0-xdebug php7.0-apcu php7.0-ldap php7.0-gmp php7.0-intl php7.0-redis php7.0-zip php7.0-soap php7.0-xml php7.0-common
 RUN     sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.0/cli/php.ini
 RUN     sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php/7.0/cli/php.ini
 RUN     sed -i 's/\display_errors\ \=\ Off/display_errors\ \=\ On/g' /etc/php/7.0/cli/php.ini
