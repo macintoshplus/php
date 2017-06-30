@@ -10,8 +10,8 @@ ENV         DEBIAN_FRONTEND noninteractive
 # Common packages
 # RUN     echo "deb http://httpredir.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/stretch-backport.list
 
-RUN wget -O /root/php.gpg https://packages.sury.org/php/apt.gpg && apt-key add /root/php.gpg
-RUN echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
+RUN 	curl https://packages.sury.org/php/apt.gpg > /root/php.gpg && apt-key add /root/php.gpg
+RUN 	echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
 
 RUN     curl https://packages.microsoft.com/config/ubuntu/17.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
