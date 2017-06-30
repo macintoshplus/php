@@ -11,15 +11,15 @@ ENV         DEBIAN_FRONTEND noninteractive
 #RUN     echo "deb http://httpredir.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/stretch-backport.list
 
 RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.2 pkg-config libmagickwand-dev
-RUN     wget -O /root/php.gpg https://packages.sury.org/php/apt.gpg && apt-key add /root/php.gpg
-RUN     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
 
-RUN     curl https://packages.microsoft.com/config/ubuntu/15.10/prod.list > /etc/apt/sources.list.d/mssql-release.list
-COPY    mysql_key.pub /root/
-RUN     apt-key add /root/mysql_key.pub
-RUN     echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
-RUN     wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add microsoft.asc
+# Add Source List
+COPY    certs/ /root/
+RUN     apt-key add /root/mysql_key.pub && apt-key add /root/sury.gpg && apt-key add /root/microsoft.asc
+RUN     echo "deb http://repo.mysql.com/apt/debian/ stretch mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
+RUN 	echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
+RUN     echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/17.04/prod zesty main" > /etc/apt/sources.list.d/mssql-release.list
 
+# Environnement
 ENV 	JAVA_VERSION 8u131
 ENV 	JAVA_DEBIAN_VERSION 8u131-b11-2
 ENV 	CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
