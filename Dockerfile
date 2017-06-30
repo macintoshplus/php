@@ -10,16 +10,12 @@ ENV         DEBIAN_FRONTEND noninteractive
 # Common packages
 # RUN     echo "deb http://httpredir.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/stretch-backport.list
 
-RUN 	curl https://packages.sury.org/php/apt.gpg > /root/php.gpg && apt-key add /root/php.gpg
-RUN 	echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
-
-RUN     curl https://packages.microsoft.com/config/ubuntu/17.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-
 # Add Source List
-COPY    mysql_key.pub /root/
-RUN     apt-key add /root/mysql_key.pub
+COPY    certs/ /root/
+RUN     apt-key add /root/certs/mysql_key.pub && apt-key add /root/certs/sury.gpg && apt-key add /root/certs/microsoft.asc
 RUN     echo "deb http://repo.mysql.com/apt/debian/ stretch mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
-RUN     wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add microsoft.asc
+RUN 	echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
+RUN     echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/17.04/prod zesty main" > /etc/apt/sources.list.d/mssql-release.list
 
 # Env config for install
 ENV 	JAVA_VERSION 8u131
