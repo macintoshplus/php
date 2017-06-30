@@ -9,10 +9,11 @@ ENV         DEBIAN_FRONTEND noninteractive
 
 # Common packages
 # RUN     echo "deb http://httpredir.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/stretch-backport.list
+RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget gnupg
 
 # Add Source List
 COPY    certs/ /root/
-RUN     apt-key add /root/certs/mysql_key.pub && apt-key add /root/certs/sury.gpg && apt-key add /root/certs/microsoft.asc
+RUN     apt-key add /root/mysql_key.pub && apt-key add /root/sury.gpg && apt-key add /root/microsoft.asc
 RUN     echo "deb http://repo.mysql.com/apt/debian/ stretch mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
 RUN 	echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
 RUN     echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/17.04/prod zesty main" > /etc/apt/sources.list.d/mssql-release.list
@@ -24,7 +25,7 @@ ENV 	CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
 ENV     ACCEPT_EULA Y
 
 # APT Install
-RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.2 lsb-release ca-certificates pkg-config libmagickwand-dev
+RUN     apt-get update && apt-get -y upgrade && apt-get -y install locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https locales-all libssl1.0.2 lsb-release ca-certificates pkg-config libmagickwand-dev
 
 RUN     apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf php7.1-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
 
