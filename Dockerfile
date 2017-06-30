@@ -9,6 +9,7 @@ ENV         DEBIAN_FRONTEND noninteractive
 
 # Common packages
 #RUN     echo "deb http://httpredir.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/stretch-backport.list
+
 RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.2 pkg-config libmagickwand-dev
 RUN     wget -O /root/php.gpg https://packages.sury.org/php/apt.gpg && apt-key add /root/php.gpg
 RUN     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
@@ -37,9 +38,6 @@ RUN         export LANGUAGE=en_US.UTF-8 && \
         export LC_ALL=en_US.UTF-8 && \
         locale-gen en_US.UTF-8 && \
         DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
-
-#COPY        bin/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb /root/
-#RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 # PHP
 RUN     apt-get -y install php7.0-cli php7.0-curl php-pear php7.0-imagick php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-mysql php7.0-sqlite3 php7.0-xmlrpc php7.0-xsl php7.0-xdebug php7.0-apcu php7.0-ldap php7.0-gmp php7.0-intl php7.0-redis php7.0-zip php7.0-soap php7.0-xml php7.0-common
