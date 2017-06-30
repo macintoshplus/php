@@ -8,26 +8,32 @@ MAINTAINER  Jean-Baptiste Nahan <jean-baptiste@nahan.fr>
 ENV         DEBIAN_FRONTEND noninteractive
 
 # Common packages
-RUN     echo "deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" > /etc/apt/sources.list.d/jessie-backport.list
-RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.0 lsb-release ca-certificates pkg-config libmagickwand-dev
+# RUN     echo "deb http://httpredir.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/stretch-backport.list
+
 RUN wget -O /root/php.gpg https://packages.sury.org/php/apt.gpg && apt-key add /root/php.gpg
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+RUN echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
 
-RUN     curl https://packages.microsoft.com/config/ubuntu/15.10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN     curl https://packages.microsoft.com/config/ubuntu/17.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
-
+# Add Source List
 COPY    mysql_key.pub /root/
 RUN     apt-key add /root/mysql_key.pub
-RUN     echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
+RUN     echo "deb http://repo.mysql.com/apt/debian/ stretch mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
 RUN     wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add microsoft.asc
 
+# Env config for install
 ENV 	JAVA_VERSION 8u131
-ENV 	JAVA_DEBIAN_VERSION 8u131-b11-1~bpo8+1
-ENV 	CA_CERTIFICATES_JAVA_VERSION 20161107~bpo8+1
+ENV 	JAVA_DEBIAN_VERSION 8u131-b11-2
+ENV 	CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
 ENV     ACCEPT_EULA Y
-RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf php7.1-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
 
-RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc && ./root/.bashrc
+# APT Install
+RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.2 lsb-release ca-certificates pkg-config libmagickwand-dev
+
+RUN     apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf php7.1-dev openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
+
+RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc
+RUN     ./root/.bashrc
 ENV     PATH "$PATH:/opt/mssql-tools/bin"
 
 RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure
@@ -43,7 +49,7 @@ RUN         export LANGUAGE=en_US.UTF-8 && \
 #RUN     dpkg -i /root/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 # PHP
-RUN     apt-get -y install php7.1-cli php7.1-curl php-pear php7.1-imagick php7.1-gd php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-sqlite3 php7.1-xmlrpc php7.1-xsl php7.1-xdebug php7.1-apcu php7.1-ldap php7.1-gmp php7.1-intl php-redis php7.1-zip php7.1-soap
+RUN     apt-get -y install php7.1-cli php7.1-curl php-pear php7.1-imagick php7.1-gd php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-sqlite3 php7.1-xmlrpc php7.1-xsl php7.1-xdebug php7.1-apcu php7.1-ldap php7.1-gmp php7.1-intl php-redis php7.1-zip php7.1-soap php7.1-xml php7.1-common
 RUN     sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.1/cli/php.ini
 RUN     sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php/7.1/cli/php.ini
 RUN     sed -i 's/\display_errors\ \=\ Off/display_errors\ \=\ On/g' /etc/php/7.1/cli/php.ini
