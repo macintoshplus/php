@@ -1,4 +1,4 @@
-# php70
+# php71
 Docker Image With PHP56 and many tools !
 
 Dev tools :
