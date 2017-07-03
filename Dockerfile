@@ -16,7 +16,8 @@ RUN     apt-get update && apt-get -y upgrade && apt-get -y install curl wget loc
 COPY    certs/ /root/
 RUN     apt-key add /root/mysql_key.pub && apt-key add /root/microsoft.asc
 RUN     echo "deb http://repo.mysql.com/apt/debian/ stretch mysql-5.7"  >> /etc/apt/sources.list.d/mysql.list
-RUN     echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/17.04/prod zesty main" > /etc/apt/sources.list.d/mssql-release.list
+RUN     echo "deb https://packages.microsoft.com/ubuntu/16.10/prod yakkety main" > /etc/apt/sources.list.d/mssql-release.list
+RUN     echo "deb https://packages.microsoft.com/ubuntu/17.04/prod zesty main" >> /etc/apt/sources.list.d/mssql-release.list
 
 # Environnement
 ENV 	JAVA_VERSION 8u131
