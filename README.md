@@ -1,20 +1,2 @@
-# php70
-Docker Image With PHP56 and many tools !
-
-Dev tools :
-
-* GIT
-* SVN
-* Curl
-* Wget
-* Nano
-
-Executable tools :
-
-* wkhtmltopdf
-* pdftk
-
-Dev quality :
-
-* PHP Mess Detector (phpmd)
-* PHP_CodeSniffer (with Symfony2 rules)
+# Base
+Docker Image is the base for create PHP Image.
