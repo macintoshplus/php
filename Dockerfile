@@ -30,34 +30,25 @@ RUN     cp Archive_Tar-1.4.3/Archive/Tar.php /usr/share/php/Archive/Tar.php
 RUN     pecl install sqlsrv-5.0.0preview && pecl install pdo_sqlsrv-5.0.0preview
 RUN     echo "extension=sqlsrv.so" > /etc/php/7.2/mods-available/sqlsrv.ini
 RUN     echo "extension=pdo_sqlsrv.so" > /etc/php/7.2/mods-available/pdo_sqlsrv.ini
-#RUN     cd /etc/php/7.2/cli/conf.d && ln -s ../../mods-available/sqlsrv.ini 20-sqlsrv.ini
-#RUN     cd /etc/php/7.2/cli/conf.d && ln -s ../../mods-available/pdo_sqlsrv.ini 20-pdo_sqlsrv.ini
 RUN     phpenmod -v 7.2 -s cli sqlsrv pdo_sqlsrv
 
 #PEAR
 RUN     pear upgrade && pear install pecl/amqp-1.9.1
 RUN     echo "extension=amqp.so" > /etc/php/7.2/mods-available/amqp.ini
-#RUN     cd /etc/php/7.2/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
-#RUN     cd /etc/php/7.2/cli/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 RUN     phpenmod -v 7.2 -s cli amqp
 
 
 RUN     pear install pecl/redis
 RUN     echo "extension=redis.so" > /etc/php/7.2/mods-available/redis.ini
-#RUN     cd /etc/php/7.2/apache2/conf.d && ln -s ../../mods-available/redis.ini 20-redis.ini
-#RUN     cd /etc/php/7.2/cli/conf.d && ln -s ../../mods-available/redis.ini 20-redis.ini
 RUN     phpenmod -v 7.2 -s cli redis
 
 RUN     pear install pecl/imagick
 RUN     echo "extension=imagick.so" > /etc/php/7.2/mods-available/imagick.ini
-#RUN     cd /etc/php/7.2/apache2/conf.d && ln -s ../../mods-available/imagick.ini 20-imagick.ini
-#RUN     cd /etc/php/7.2/cli/conf.d && ln -s ../../mods-available/imagick.ini 20-imagick.ini
 RUN     phpenmod -v 7.2 -s cli imagick
 
 RUN     git clone git://github.com/xdebug/xdebug.git
 RUN     cd xdebug && /usr/bin/phpize7.2 && ./configure --enable-xdebug && make && make install
 RUN     echo "zend_extension=xdebug.so" > /etc/php/7.2/mods-available/xdebug.ini
-#RUN     cd /etc/php/7.2/cli/conf.d && ln -s ../../mods-available/xdebug.ini 20-xdebug.ini
 RUN     phpenmod -v 7.2 -s cli xdebug
 
 
