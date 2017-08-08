@@ -32,6 +32,11 @@ RUN         sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php5/
 RUN             sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/\;disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/g' /etc/php5/cli/php.ini
 #RUN        sed -i 's/;include_path = ".:\/usr\/share\/php"/include_path = ".:\/var\/www\/library"/g' /etc/php5/cli/php.ini
 
+RUN 	echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
+RUN	apt-get install -y openjdk-8-jre-headless ca-certificates-java
+RUN 	/var/lib/dpkg/info/ca-certificates-java.postinst configure
+RUN 	ln -s /usr/bin/java /bin/java
+
 RUN     wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.4.0/pickle.phar
 RUN     php pickle.phar install xdebug
 
