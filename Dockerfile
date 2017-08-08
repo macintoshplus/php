@@ -20,11 +20,8 @@ RUN     echo "deb https://packages.microsoft.com/ubuntu/16.10/prod yakkety main"
 RUN     echo "deb https://packages.microsoft.com/ubuntu/17.04/prod zesty main" >> /etc/apt/sources.list.d/mssql-release.list
 
 # Environnement
-ENV 	JAVA_VERSION 8u131
-ENV 	JAVA_DEBIAN_VERSION 8u131-b11-2
-ENV 	CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
 ENV     ACCEPT_EULA Y
-RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
+RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf openjdk-8-jre-headless ca-certificates-java
 
 RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc
 RUN     /root/.bashrc
