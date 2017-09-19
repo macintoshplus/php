@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ -d "/src" ]
+if [ -d "/sources" ]
 then
 
-USERID=$(stat -c "%u" /src)
-GROUPID=$(stat -c "%g" /src)
+USERID=$(stat -c "%u" /sources)
+GROUPID=$(stat -c "%g" /sources)
 
 groupmod -g $GROUPID phpuser
 usermod -u $USERID -g $GROUPID phpuser
