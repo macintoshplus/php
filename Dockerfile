@@ -25,6 +25,7 @@ RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client 
 
 RUN     wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
 RUN     dpkg -i libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
+RUN     rm libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
 
 RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc
 RUN     /root/.bashrc
