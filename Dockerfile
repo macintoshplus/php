@@ -23,6 +23,9 @@ RUN     echo "deb https://packages.microsoft.com/ubuntu/17.04/prod zesty main" >
 ENV     ACCEPT_EULA Y
 RUN     apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf openjdk-8-jre-headless ca-certificates-java
 
+RUN     wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
+RUN     dpkg -i libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
+
 RUN     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bash_profile && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> /root/.bashrc && chmod +x /root/.bashrc
 RUN     /root/.bashrc
 ENV     PATH "$PATH:/opt/mssql-tools/bin"
