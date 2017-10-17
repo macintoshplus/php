@@ -5,6 +5,7 @@ Docker Image With PHP 7.2 and many tools !
 
 * php7.2-dev
 * php7.2-cli
+* php7.2-bcmath
 * php7.2-curl
 * php7.2-gd
 * php7.2-mbstring
