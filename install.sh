@@ -23,12 +23,12 @@ wget https://github.com/pear/Archive_Tar/releases/download/1.4.3/Archive_Tar-1.4
 tar -xvf Archive_Tar-1.4.3.tgz
 cp Archive_Tar-1.4.3/Archive/Tar.php /usr/share/php/Archive/Tar.php
 
-pecl install sqlsrv-5.0.0preview && pecl install pdo_sqlsrv-5.0.0preview
+pecl install sqlsrv-5.1.1preview && pecl install pdo_sqlsrv-5.1.1preview
 echo "extension=sqlsrv.so" > /etc/php/7.2/mods-available/sqlsrv.ini
 echo "extension=pdo_sqlsrv.so" > /etc/php/7.2/mods-available/pdo_sqlsrv.ini
 
 #PEAR
-pear upgrade && pear install pecl/amqp-1.9.1
+pear upgrade && pear install pecl/amqp-1.9.3
 echo "extension=amqp.so" > /etc/php/7.2/mods-available/amqp.ini
 
 
