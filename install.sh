@@ -22,7 +22,7 @@ echo "extension=pdo_sqlsrv.so" > /etc/php/7.1/mods-available/pdo_sqlsrv.ini
 phpenmod sqlsrv pdo_sqlsrv
 
 #PEAR
-pear upgrade && pear install pecl/amqp-1.9.1
+pear upgrade && pear install pecl/amqp-1.9.3
 echo "extension=amqp.so" > /etc/php/7.1/mods-available/amqp.ini
 #RUN     cd /etc/php/7.1/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 phpenmod amqp
