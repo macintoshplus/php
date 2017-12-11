@@ -39,7 +39,9 @@ pear install pecl/imagick
 echo "extension=imagick.so" > /etc/php/7.2/mods-available/imagick.ini
 
 git clone git://github.com/xdebug/xdebug.git
-cd xdebug && /usr/bin/phpize7.2 && ./configure --enable-xdebug && make && make install
+cd xdebug
+git co XDEBUG_2_5_5
+/usr/bin/phpize7.2 && ./configure --enable-xdebug && make && make install
 echo "zend_extension=xdebug.so" > /etc/php/7.2/mods-available/xdebug.ini
 
 phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis imagick xdebug
