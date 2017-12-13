@@ -15,7 +15,7 @@ echo "deb https://packages.microsoft.com/ubuntu/17.04/prod zesty main" >> /etc/a
 export ACCEPT_EULA=Y
 apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools wkhtmltopdf openjdk-8-jre-headless ca-certificates-java
 
-wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
+wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb7u3_amd64.deb
 dpkg -i libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
 rm libssl1.0.0_1.0.1t-1+deb7u2_amd64.deb
 
