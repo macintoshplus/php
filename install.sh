@@ -40,7 +40,7 @@ echo "extension=imagick.so" > /etc/php/7.2/mods-available/imagick.ini
 
 git clone git://github.com/xdebug/xdebug.git
 cd xdebug
-git co XDEBUG_2_5_5
+git co 2.6.0beta1
 /usr/bin/phpize7.2 && ./configure --enable-xdebug && make && make install
 echo "zend_extension=xdebug.so" > /etc/php/7.2/mods-available/xdebug.ini
 
