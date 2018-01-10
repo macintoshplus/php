@@ -8,8 +8,9 @@ apt-key add /root/sury.gpg
 echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
 
 # PHP
-apt-get update && apt-get upgrade -y && apt-get -y install php7.2-dev php7.2-cli php7.2-bcmath php7.2-curl php-pear php7.2-gd php7.2-mbstring php7.2-mysql php7.2-sqlite3 php7.2-xmlrpc php7.2-xsl php7.2-ldap php7.2-gmp php7.2-intl php7.2-zip php7.2-soap php7.2-xml php7.2-common php7.2-json php7.2-opcache php7.2-readline libmagickwand-6.q16-dev
+apt-get update && apt-get upgrade -y && apt-get -y install php7.2-dev php7.2-cli php7.2-bcmath php7.2-curl php-pear php7.2-gd php7.2-mbstring php7.2-mysql php7.2-sqlite3 php7.2-xmlrpc php7.2-xsl php7.2-ldap php7.2-gmp php7.2-intl php7.2-zip php7.2-soap php7.2-xml php7.2-common php7.2-json php7.2-opcache php7.2-readline
 # Disabled ext from repos :  php7.2-imagick php7.2-xdebug php7.2-apcu
+# Disable dependencies : libmagickwand-6.q16-dev
 # Disabled php-redis
 
 sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.2/cli/php.ini
@@ -35,8 +36,8 @@ echo "extension=amqp" > /etc/php/7.2/mods-available/amqp.ini
 pear install pecl/redis
 echo "extension=redis" > /etc/php/7.2/mods-available/redis.ini
 
-pear install pecl/imagick
-echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
+#pear install pecl/imagick
+#echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 
 git clone git://github.com/xdebug/xdebug.git
 cd xdebug
@@ -44,7 +45,8 @@ git co 2.6.0beta1
 /usr/bin/phpize7.2 && ./configure --enable-xdebug && make && make install
 echo "zend_extension=xdebug" > /etc/php/7.2/mods-available/xdebug.ini
 
-phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis imagick xdebug
+phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug
+# Disable : imagick
 
 useradd -s /bin/bash --home /sources --no-create-home phpuser
 
