@@ -39,10 +39,11 @@ echo "extension=redis" > /etc/php/7.2/mods-available/redis.ini
 #pear install pecl/imagick
 #echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 
-git clone git://github.com/xdebug/xdebug.git
-cd xdebug
-git co 2.6.0beta1
-/usr/bin/phpize7.2 && ./configure --enable-xdebug && make && make install
+#git clone git://github.com/xdebug/xdebug.git
+#cd xdebug
+#git co 2.6.0beta1
+#/usr/bin/phpize7.2 && ./configure --enable-xdebug && make && make install
+pear install pecl/xdebug
 echo "zend_extension=xdebug" > /etc/php/7.2/mods-available/xdebug.ini
 
 phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug
