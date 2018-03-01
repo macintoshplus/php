@@ -24,14 +24,14 @@ Docker Image With PHP 7.2 and many tools !
 * php7.2-json
 * php7.2-opcache
 * php7.2-readline
-* amqp-1.9.1
+* php7.2-xdebug
+* amqp-1.9.3
 * pdo_sqlsrv
 * sqlsrv
 
 ## Disabled Extensions
 
 php7.2-imagick
-php7.2-xdebug
 php7.2-apcu
 
 ## Dev quality
