@@ -36,8 +36,8 @@ echo "extension=amqp" > /etc/php/7.2/mods-available/amqp.ini
 pear install pecl/redis
 echo "extension=redis" > /etc/php/7.2/mods-available/redis.ini
 
-#pear install pecl/imagick
-#echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
+pear install pecl/imagick
+echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 
 #git clone git://github.com/xdebug/xdebug.git
 #cd xdebug
