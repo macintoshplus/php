@@ -1,6 +1,6 @@
 #!/bin/sh
 ##
-# Jb Nahan PHP 7.0 container
+# Jb Nahan PHP 7.2 container
 ##
 
 export DEBIAN_FRONTEND=noninteractive
@@ -24,7 +24,7 @@ wget https://github.com/pear/Archive_Tar/releases/download/1.4.3/Archive_Tar-1.4
 tar -xvf Archive_Tar-1.4.3.tgz
 cp Archive_Tar-1.4.3/Archive/Tar.php /usr/share/php/Archive/Tar.php
 
-pecl install sqlsrv-5.2.0RC1 && pecl install pdo_sqlsrv-5.2.0RC1
+pecl install sqlsrv-5.2.0 && pecl install pdo_sqlsrv-5.2.0
 echo "extension=sqlsrv" > /etc/php/7.2/mods-available/sqlsrv.ini
 echo "extension=pdo_sqlsrv" > /etc/php/7.2/mods-available/pdo_sqlsrv.ini
 
@@ -36,6 +36,7 @@ echo "extension=amqp" > /etc/php/7.2/mods-available/amqp.ini
 pear install pecl/redis
 echo "extension=redis" > /etc/php/7.2/mods-available/redis.ini
 
+apt insall -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-5 libmagickcore-6.q16-5
 pear install pecl/imagick
 echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 
@@ -46,9 +47,9 @@ echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 pear install pecl/xdebug
 echo "zend_extension=xdebug" > /etc/php/7.2/mods-available/xdebug.ini
 
-phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug
+phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug imagick
 # Disable : imagick
 
 useradd -s /bin/bash --home /sources --no-create-home phpuser
 
-apt-get remove -y libgcc-6-dev libgcc-7-dev && apt autoremove -y
+apt-get remove -y libgcc-6-dev libgcc-7-dev libmagickwand-dev libmagickcore-dev && apt autoremove -y
