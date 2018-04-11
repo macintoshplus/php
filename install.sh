@@ -36,7 +36,7 @@ echo "extension=amqp" > /etc/php/7.2/mods-available/amqp.ini
 pear install pecl/redis
 echo "extension=redis" > /etc/php/7.2/mods-available/redis.ini
 
-apt insall -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-5 libmagickcore-6.q16-5
+apt install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-5 libmagickcore-6.q16-5
 pear install pecl/imagick
 echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 
