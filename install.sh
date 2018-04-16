@@ -13,7 +13,7 @@ echo "deb https://packages.microsoft.com/ubuntu/17.04/prod zesty main" >> /etc/a
 
 # Environnement
 export ACCEPT_EULA=Y
-apt-get update && apt-get -y upgrade && apt-get install -y mysql-client msodbcsql mssql-tools openjdk-8-jre-headless ca-certificates-java
+apt-get update && apt-get -y upgrade && apt-get install -y multiarch-support mysql-client msodbcsql mssql-tools openjdk-8-jre-headless ca-certificates-java
 
 # Fix SQLSTATE[01000]: [unixODBC][Driver Manager]Can't open lib '/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.9.1' : file not found
 wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb7u4_amd64.deb
