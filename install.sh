@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 ##
 # Jb Nahan Base container
 ##
