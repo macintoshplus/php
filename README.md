@@ -25,16 +25,11 @@ Docker Image With PHP 7.2 and many tools !
 * php7.2-opcache
 * php7.2-readline
 * php7.2-xdebug
+* php7.2-imagick
 * amqp-1.9.3
 * pdo_sqlsrv
 * sqlsrv
 
 ## Disabled Extensions
 
-php7.2-imagick
 php7.2-apcu
-
-## Dev quality
-
-* PHP Mess Detector (phpmd)
-* PHP_CodeSniffer (with Symfony2 rules)
