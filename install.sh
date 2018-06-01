@@ -3,8 +3,8 @@
 # Jb Nahan Base container
 ##
 
-apt-get update && apt-get -y upgrade && apt-get -y install gnupg curl wget locales nano git subversion sudo librabbitmq-dev pdftk xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.2 pkg-config libmagickwand-dev
-
+apt-get update && apt-get -y upgrade && apt-get -y install curl wget locales nano git subversion sudo librabbitmq-dev xfonts-75dpi libfontconfig1 libjpeg62-turbo libxrender1 xfonts-base fontconfig unixodbc-dev apt-transport-https gnupg locales-all libssl1.0.2 pkg-config libmagickwand-dev
+apt-get -y install pdftk 
 # Add Source List
 
 apt-key add /root/mysql_key.pub && apt-key add /root/microsoft.asc
@@ -34,4 +34,4 @@ export LANGUAGE=en_US.UTF-8 && \
         locale-gen en_US.UTF-8 && \
         DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
-apt remove -y libgcc-6-dev libgcc-7-dev && apt-get autoremove -y && apt-get autoclean && apt-get clean
+apt remove -y libgcc-6-dev && apt-get autoremove -y && apt-get autoclean && apt-get clean

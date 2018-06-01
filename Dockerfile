@@ -2,7 +2,7 @@
 # Jb Nahan Base container
 ##
 
-FROM            debian:testing
+FROM            debian:stable
 MAINTAINER  Jean-Baptiste Nahan <jean-baptiste@nahan.fr>
 
 ENV         DEBIAN_FRONTEND noninteractive
