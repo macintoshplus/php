@@ -39,7 +39,7 @@ pear upgrade && pear install pecl/amqp-1.9.3
 echo "extension=amqp" > /etc/php/7.3/mods-available/amqp.ini
 
 
-pear install pecl/redis
+pear install pecl/redis-4.2.0RC3
 echo "extension=redis" > /etc/php/7.3/mods-available/redis.ini
 
 apt install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-3 libmagickcore-6.q16-3
@@ -50,7 +50,7 @@ echo "extension=imagick" > /etc/php/7.3/mods-available/imagick.ini
 #cd xdebug
 #git co 2.6.0beta1
 #/usr/bin/phpize7.3 && ./configure --enable-xdebug && make && make install
-pear install pecl/xdebug
+pear install pecl/xdebug-2.7.0beta1
 echo "zend_extension=xdebug" > /etc/php/7.3/mods-available/xdebug.ini
 
 phpenmod -v 7.3 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug imagick
