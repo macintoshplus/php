@@ -7,6 +7,9 @@ MAINTAINER  Jean-Baptiste Nahan <jean-baptiste@nahan.fr>
 
 ENV         DEBIAN_FRONTEND noninteractive
 
+ARG uid=1008
+ARG gid=1008
+
 COPY    certs/ /root/
 COPY    install.sh  /root/install.sh
 RUN 	chmod +x /root/install.sh

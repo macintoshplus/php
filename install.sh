@@ -56,6 +56,10 @@ echo "zend_extension=xdebug" > /etc/php/7.3/mods-available/xdebug.ini
 phpenmod -v 7.3 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug imagick
 # Disable : imagick
 
-useradd -s /bin/bash --home /sources --no-create-home phpuser
+#useradd -s /bin/bash --home /sources --no-create-home phpuser
+
+groupadd -g ${gid} phpuser
+useradd -l -u ${uid} -g ${gid} -m -s /bin/bash phpuser
+usermod -a -G www-data phpuser
 
 apt-get remove -y libgcc-6-dev libmagickwand-dev libmagickcore-dev && apt autoremove -y
