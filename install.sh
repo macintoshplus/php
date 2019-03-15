@@ -8,8 +8,11 @@ export DEBIAN_FRONTEND=noninteractive
 apt-key add /root/sury.gpg
 echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
 
+wget -q -O - https://packages.blackfire.io/gpg.key | sudo apt-key add -
+echo "deb http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list
+
 # PHP
-apt-get update && apt-get upgrade -y && apt-get -y install php7.1-dev php7.1-cli php7.1-bcmath php7.1-curl php-pear php7.1-imagick php7.1-gd php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-sqlite3 php7.1-xmlrpc php7.1-xsl php7.1-apcu php7.1-ldap php7.1-gmp php7.1-intl php-redis php7.1-zip php7.1-soap php7.1-xml php7.1-common && apt-get autoremove -y && apt-get autoclean && apt-get clean
+apt-get update && apt-get upgrade -y && apt-get -y install php7.1-dev php7.1-cli php7.1-bcmath php7.1-curl php-pear php7.1-imagick php7.1-gd php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-sqlite3 php7.1-xmlrpc php7.1-xsl php7.1-apcu php7.1-ldap php7.1-gmp php7.1-intl php-redis php7.1-zip php7.1-soap php7.1-xml php7.1-common blackfire-agent blackfire-php && apt-get autoremove -y && apt-get autoclean && apt-get clean
 sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php/7.1/cli/php.ini
 sed -i 's/\memory_limit\ \=\ 128M/memory_limit\ \=\ -1/g' /etc/php/7.1/cli/php.ini
 sed -i 's/\display_errors\ \=\ Off/display_errors\ \=\ On/g' /etc/php/7.1/cli/php.ini
@@ -22,7 +25,7 @@ echo "extension=pdo_sqlsrv.so" > /etc/php/7.1/mods-available/pdo_sqlsrv.ini
 phpenmod sqlsrv pdo_sqlsrv
 
 #PEAR
-pear upgrade && pear install pecl/amqp-1.9.3
+pear upgrade && pear install pecl/amqp-1.9.4
 echo "extension=amqp.so" > /etc/php/7.1/mods-available/amqp.ini
 #RUN     cd /etc/php/7.1/apache2/conf.d && ln -s ../../mods-available/amqp.ini 20-amqp.ini
 phpenmod amqp
