@@ -9,11 +9,11 @@ apt-key add /root/sury.gpg
 echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
 
 # Blackfire
-# wget -q -O - https://packagecloud.io/gpg.key | sudo apt-key add -
-# echo "deb http://packages.blackfire.io/debian any main" >/etc/apt/sources.list.d/blackfire.list
+wget -q -O - https://packages.blackfire.io/gpg.key | sudo apt-key add -
+echo "deb http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list
 
 # PHP
-apt-get update && apt-get upgrade -y && apt-get -y install php7.3-dev php7.3-cli php7.3-bcmath php7.3-curl php-pear php7.3-gd php7.3-mbstring php7.3-mysql php7.3-sqlite3 php7.3-xmlrpc php7.3-xsl php7.3-ldap php7.3-gmp php7.3-intl php7.3-zip php7.3-soap php7.3-xml php7.3-common php7.3-json php7.3-opcache php7.3-readline 
+apt-get update && apt-get upgrade -y && apt-get -y install php7.3-dev php7.3-cli php7.3-bcmath php7.3-curl php-pear php7.3-gd php7.3-mbstring php7.3-mysql php7.3-sqlite3 php7.3-xmlrpc php7.3-xsl php7.3-ldap php7.3-gmp php7.3-intl php7.3-zip php7.3-soap php7.3-xml php7.3-common php7.3-json php7.3-opcache php7.3-readline blackfire-agent blackfire-php
 # Disabled : blackfire-agent blackfire-php
 # Disabled ext from repos :  php7.3-imagick php7.3-xdebug php7.3-apcu
 # Disable dependencies : libmagickwand-6.q16-dev
