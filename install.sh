@@ -50,7 +50,7 @@ echo "extension=imagick" > /etc/php/7.3/mods-available/imagick.ini
 #cd xdebug
 #git co 2.6.0beta1
 #/usr/bin/phpize7.3 && ./configure --enable-xdebug && make && make install
-pear install pecl/xdebug-2.7.0beta1
+pear install pecl/xdebug-2.7.0
 echo "zend_extension=xdebug" > /etc/php/7.3/mods-available/xdebug.ini
 
 phpenmod -v 7.3 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug imagick
