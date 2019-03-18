@@ -5,7 +5,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 # Sury : PHP Sources
-apt-key add /root/sury.gpg
+wget -q -O - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
 echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
 
 # Blackfire
