@@ -35,7 +35,7 @@ echo "extension=sqlsrv" > /etc/php/7.3/mods-available/sqlsrv.ini
 echo "extension=pdo_sqlsrv" > /etc/php/7.3/mods-available/pdo_sqlsrv.ini
 
 #PEAR
-pear upgrade && pear install pecl/amqp-1.9.3
+pear upgrade && pear install pecl/amqp
 echo "extension=amqp" > /etc/php/7.3/mods-available/amqp.ini
 
 
