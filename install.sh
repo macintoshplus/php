@@ -6,7 +6,7 @@
 export  DEBIAN_FRONTEND=noninteractive
 
 # Add Source List
-apt-key add /root/sury.gpg
+wget -q -O - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
 echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/sury-php.list
 
 # PHP
@@ -36,6 +36,6 @@ phpenmod amqp xdebug
 
 useradd -s /bin/bash --home /sources --no-create-home phpuser
 
-apt-get remove -y libgcc-6-dev libgcc-7-dev php7.0-dev
+apt-get remove -y libgcc-6-dev php7.0-dev
 apt-get autoremove -y
 
