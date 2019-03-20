@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -ex
 ##
 # Jb Nahan PHP 7.2 container
 ##
@@ -43,7 +43,7 @@ echo "extension=amqp" > /etc/php/7.2/mods-available/amqp.ini
 pear install pecl/redis
 echo "extension=redis" > /etc/php/7.2/mods-available/redis.ini
 
-apt install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-3 libmagickcore-6.q16-3
+apt-get install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-3 libmagickcore-6.q16-3
 pear install pecl/imagick
 echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 
@@ -55,8 +55,7 @@ pear install pecl/xdebug
 echo "zend_extension=xdebug" > /etc/php/7.2/mods-available/xdebug.ini
 
 phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug imagick
-# Disable : imagick
 
 useradd -s /bin/bash --home /sources --no-create-home phpuser
 
-apt-get remove -y libgcc-6-dev libmagickwand-dev libmagickcore-dev && apt autoremove -y
+apt-get remove -y libgcc-6-dev libmagickwand-dev libmagickcore-dev && apt-get autoremove -y
