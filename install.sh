@@ -34,7 +34,7 @@ pear install pecl/xdebug
 echo "zend_extension=/usr/lib/php/20160303/xdebug.so" > /etc/php/7.1/mods-available/xdebug.ini
 phpenmod xdebug
 
-apt-get remove -y libgcc-6-dev libgcc-7-dev php7.1-dev
+apt-get remove -y libgcc-6-dev php7.1-dev
 apt-get autoremove -y
 apt-get autoclean
 apt-get clean
