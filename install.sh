@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -ex
 ##
 # Jb Nahan PHP 7.0 container
 ##
@@ -17,20 +17,25 @@ sed -i 's/\display_errors\ \=\ Off/display_errors\ \=\ On/g' /etc/php/7.0/cli/ph
 sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/\;disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,/g' /etc/php/7.0/cli/php.ini
 
 pecl channel-update pecl.php.net
-pecl install sqlsrv && pecl install pdo_sqlsrv
+pecl install sqlsrv
+pecl install pdo_sqlsrv
 echo "extension=sqlsrv.so" > /etc/php/7.0/mods-available/sqlsrv.ini
 echo "extension=pdo_sqlsrv.so" > /etc/php/7.0/mods-available/pdo_sqlsrv.ini
 
 phpenmod sqlsrv pdo_sqlsrv
 
 #PEAR
-pear upgrade && pear install pecl/amqp-1.9.1
+pear update-channels 
+pear install pecl/amqp-1.9.1
 echo "extension=amqp.so" > /etc/php/7.0/mods-available/amqp.ini
-pear channel-discover pear.phpmd.org && pear channel-discover pear.pdepend.org && pear channel-discover pear.phpdoc.org && pear channel-discover components.ez.no
 
-phpenmod amqp
+pear install pecl/xdebug-2.7.0
+echo "zend_extension=xdebug.so" > /etc/php/7.0/mods-available/xdebug.ini
+
+phpenmod amqp xdebug
 
 useradd -s /bin/bash --home /sources --no-create-home phpuser
 
-apt remove -y libgcc-6-dev libgcc-7-dev && apt autoremove -y
+apt-get remove -y libgcc-6-dev libgcc-7-dev php7.0-dev
+apt-get autoremove -y
 
