@@ -30,7 +30,7 @@ pear upgrade && pear install pecl/amqp-1.9.4
 echo "extension=amqp.so" > /etc/php/7.1/mods-available/amqp.ini
 
 phpenmod amqp
-pear install pecl/xdebug-2.5.5
+pear install pecl/xdebug
 echo "zend_extension=/usr/lib/php/20160303/xdebug.so" > /etc/php/7.1/mods-available/xdebug.ini
 phpenmod xdebug
 
