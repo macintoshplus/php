@@ -1,5 +1,5 @@
 # php70
-Docker Image With PHP56 and many tools !
+Docker Image With PHP 7.0 and many tools !
 
 Dev tools :
 
@@ -13,8 +13,3 @@ Executable tools :
 
 * wkhtmltopdf
 * pdftk
-
-Dev quality :
-
-* PHP Mess Detector (phpmd)
-* PHP_CodeSniffer (with Symfony2 rules)
