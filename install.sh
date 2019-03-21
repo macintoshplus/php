@@ -29,7 +29,7 @@ pear update-channels
 pear install pecl/amqp-1.9.1
 echo "extension=amqp.so" > /etc/php/7.0/mods-available/amqp.ini
 
-pear install pecl/xdebug-2.7.0
+pear install pecl/xdebug-2.5.5
 echo "zend_extension=xdebug.so" > /etc/php/7.0/mods-available/xdebug.ini
 
 phpenmod amqp xdebug
