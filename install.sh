@@ -31,8 +31,8 @@ pecl channel-update pecl.php.net
 #cp Archive_Tar-1.4.3/Archive/Tar.php /usr/share/php/Archive/Tar.php
 #rm -rf  Archive_Tar-1.4.3
 
-pecl install sqlsrv-5.6.0
-pecl install pdo_sqlsrv-5.6.0
+pecl install sqlsrv-5.6.1
+pecl install pdo_sqlsrv-5.6.1
 echo "extension=sqlsrv" > /etc/php/7.3/mods-available/sqlsrv.ini
 echo "extension=pdo_sqlsrv" > /etc/php/7.3/mods-available/pdo_sqlsrv.ini
 
@@ -42,7 +42,7 @@ pear install pecl/amqp
 echo "extension=amqp" > /etc/php/7.3/mods-available/amqp.ini
 
 
-pear install pecl/redis-4.2.0RC3
+pear install pecl/redis-5.1.1
 echo "extension=redis" > /etc/php/7.3/mods-available/redis.ini
 
 apt-get install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-3 libmagickcore-6.q16-3
@@ -50,7 +50,7 @@ pear install pecl/imagick
 echo "extension=imagick" > /etc/php/7.3/mods-available/imagick.ini
 
 
-pear install pecl/xdebug-2.7.0
+pear install pecl/xdebug-2.8.0
 echo "zend_extension=xdebug" > /etc/php/7.3/mods-available/xdebug.ini
 
 phpenmod -v 7.3 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug imagick
