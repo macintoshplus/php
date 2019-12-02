@@ -3,7 +3,7 @@
 ##
 
 FROM           macintoshplus/php:base
-MAINTAINER  Jean-Baptiste Nahan <jean-baptiste@nahan.fr>
+MAINTAINER  Jean-Baptiste Nahan <814683+macintoshplus@users.noreply.github.com>
 
 ENV         DEBIAN_FRONTEND noninteractive
 
