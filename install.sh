@@ -25,25 +25,25 @@ sed -i 's/disable_functions\ \=\ pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait
 
 pecl channel-update pecl.php.net
 ## Fix Tar Error
-wget https://github.com/pear/Archive_Tar/releases/download/1.4.3/Archive_Tar-1.4.3.tgz
-tar -xvf Archive_Tar-1.4.3.tgz
-cp Archive_Tar-1.4.3/Archive/Tar.php /usr/share/php/Archive/Tar.php
+#wget https://github.com/pear/Archive_Tar/releases/download/1.4.3/Archive_Tar-1.4.3.tgz
+#tar -xvf Archive_Tar-1.4.3.tgz
+#cp Archive_Tar-1.4.3/Archive/Tar.php /usr/share/php/Archive/Tar.php
 
-pecl install sqlsrv-5.6.0
-pecl install pdo_sqlsrv-5.6.0
+pecl install sqlsrv-5.6.1
+pecl install pdo_sqlsrv-5.6.1
 echo "extension=sqlsrv" > /etc/php/7.2/mods-available/sqlsrv.ini
 echo "extension=pdo_sqlsrv" > /etc/php/7.2/mods-available/pdo_sqlsrv.ini
 
 #PEAR
 pear upgrade
-pear install pecl/amqp-1.9.4
+pear install pecl/amqp
 echo "extension=amqp" > /etc/php/7.2/mods-available/amqp.ini
 
 
 pear install pecl/redis
 echo "extension=redis" > /etc/php/7.2/mods-available/redis.ini
 
-apt-get install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-3 libmagickcore-6.q16-3
+apt-get install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-6 libmagickcore-6.q16-6
 pear install pecl/imagick
 echo "extension=imagick" > /etc/php/7.2/mods-available/imagick.ini
 
@@ -58,4 +58,4 @@ phpenmod -v 7.2 -s cli amqp sqlsrv pdo_sqlsrv redis xdebug imagick
 
 useradd -s /bin/bash --home /sources --no-create-home phpuser
 
-apt-get remove -y libgcc-6-dev libmagickwand-dev libmagickcore-dev && apt-get autoremove -y
+apt-get remove -y libgcc-8-dev libmagickwand-dev libmagickcore-dev && apt-get autoremove -y
