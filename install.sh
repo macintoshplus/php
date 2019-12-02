@@ -45,7 +45,7 @@ echo "extension=amqp" > /etc/php/7.3/mods-available/amqp.ini
 pear install pecl/redis-5.1.1
 echo "extension=redis" > /etc/php/7.3/mods-available/redis.ini
 
-apt-get install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-3 libmagickcore-6.q16-3
+apt-get install -y libmagickwand-dev libmagickcore-dev libmagickwand-6.q16-6 libmagickcore-6.q16-6
 pear install pecl/imagick
 echo "extension=imagick" > /etc/php/7.3/mods-available/imagick.ini
 
@@ -61,4 +61,4 @@ groupadd -g ${gid} phpuser
 useradd -l -u ${uid} -g ${gid} -m -s /bin/bash phpuser
 usermod -a -G www-data phpuser
 
-apt-get remove -y libgcc-6-dev php7.3-dev libmagickwand-dev libmagickcore-dev && apt-get autoremove -y
+apt-get remove -y libgcc-8-dev php7.3-dev libmagickwand-dev libmagickcore-dev && apt-get autoremove -y
