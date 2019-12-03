@@ -7,8 +7,8 @@ MAINTAINER  Jean-Baptiste Nahan <814683+macintoshplus@users.noreply.github.com>
 
 ENV         DEBIAN_FRONTEND noninteractive
 
-ARG uid=1008
-ARG gid=1008
+ARG uid=1000
+ARG gid=1000
 
 COPY    certs/ /root/
 COPY    install.sh  /root/install.sh

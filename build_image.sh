@@ -4,5 +4,5 @@ DIR=$(dirname $0)
 
 cd $DIR
 
-docker build -t php72 --network host .
+docker build -t php74 --network host .
 
